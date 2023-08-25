@@ -12,8 +12,6 @@
 
 typedef struct s_game
 {
-	int		i;
-	int		j;
 	int		x;
 	int		y;
 	int		fd;
@@ -21,6 +19,8 @@ typedef struct s_game
 	int		map_height;
 	int		map_collect;
 	int		map_exit;
+	int		map_player;
+	int		map_floor;
 	int		img_width;
 	int		img_height;
 	int		player_exist;
@@ -38,5 +38,7 @@ typedef struct s_game
 	char	**map_2d;
 	char	**vp_map;
 }			t_game;
+
+
 
 #endif

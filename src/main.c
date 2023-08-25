@@ -6,16 +6,13 @@
 /*   By: alsaeed <alsaeed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 13:39:44 by alsaeed           #+#    #+#             */
-/*   Updated: 2023/08/23 15:01:10 by alsaeed          ###   ########.fr       */
+/*   Updated: 2023/08/25 09:54:29 by alsaeed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../inc/so_long.h"
 
-
-
-void	map_height_width(t_game *game, char *map_file)
+void	get_map_height_width(t_game *game, char *map_file)
 {
 	game->fd = open(map_file, O_RDONLY);
 	game->map_height = 0;
@@ -40,16 +37,17 @@ void	map_height_width(t_game *game, char *map_file)
 		free(game->map_read);
 	}
 	close(game->fd);
-	ft_print_map(&game, map_file);
-	
+	init_map(game);
+	print_2d_map(game, map_file);
 }
 
 int main(int argc, char **argv)
 {
-	t_game	game;
-
+	t_game	*game;
+	
 	check_ber(argc, argv[1]);
-	map_height_width(&game, argv[1]);
+	get_map_height_width(game, argv[1]);
+	check_map_errors(game, game->y, game->x);
 	
 	
 	return(0);

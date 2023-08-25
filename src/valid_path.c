@@ -6,7 +6,7 @@
 /*   By: alsaeed <alsaeed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 15:30:47 by alsaeed           #+#    #+#             */
-/*   Updated: 2023/08/23 16:34:15 by alsaeed          ###   ########.fr       */
+/*   Updated: 2023/08/25 10:18:51 by alsaeed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,29 @@
 void backup_map(t_game *game)
 {
 	game->vp_map = (char **)malloc(sizeof(char *) * (game->map_height + 1));
-	game->i = 0;
-	while(game->map_2d[game->i])
+	if (!game->vp_map)
+		return ;
+	game->y = 0;
+	while(game->map_2d[game->y])
 	{
-		game->vp_map[game->i] = ft_strdup(game->map_2d[game->i]);
-		game->i++;
+		game->vp_map[game->y] = ft_strdup(game->map_2d[game->y]);
+		game->y++;
 	}
-	game->vp_map[game->i] = NULL;
+	game->vp_map[game->y] = NULL;
 }
 
-void validate_path(t_game *game, int x, int y)
+void validate_path(t_game *game, int y, int x)
 {
-	if (game->vp_map[x][y] == 'E')
+	if (game->vp_map[y][x] == 'E')
 		game->valid_exit++;
-	if (game->vp_map[x][y] == '1' || game->vp_map[x][y] == 'V' \
-	|| game->vp_map[x][y] == 'E')
+	if (game->vp_map[y][x] == '1' || game->vp_map[y][x] == 'V' \
+	|| game->vp_map[y][x] == 'E')
 		return ;
-	if (game->vp_map[x][y] == 'C')
+	if (game->vp_map[y][x] == 'C')
 		game->valid_collect++;
-	game->vp_map[x][y] = 'V';
-	validate_path(game, x, y + 1);
-	validate_path(game, x, y - 1);
-	validate_path(game, x + 1, y);
-	validate_path(game, x - 1, y);
+	game->vp_map[y][x] = 'V';
+	validate_path(game, y, x + 1);
+	validate_path(game, y, x - 1);
+	validate_path(game, y + 1, x);
+	validate_path(game, y - 1, x);
 }
