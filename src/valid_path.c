@@ -6,13 +6,13 @@
 /*   By: alsaeed <alsaeed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 15:30:47 by alsaeed           #+#    #+#             */
-/*   Updated: 2023/08/25 10:18:51 by alsaeed          ###   ########.fr       */
+/*   Updated: 2023/08/31 17:49:04 by alsaeed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-void backup_map(t_game *game)
+void	backup_map(t_game *game)
 {
 	game->vp_map = (char **)malloc(sizeof(char *) * (game->map_height + 1));
 	if (!game->vp_map)
@@ -26,12 +26,12 @@ void backup_map(t_game *game)
 	game->vp_map[game->y] = NULL;
 }
 
-void validate_path(t_game *game, int y, int x)
+void	validate_path(t_game *game, int y, int x)
 {
 	if (game->vp_map[y][x] == 'E')
 		game->valid_exit++;
-	if (game->vp_map[y][x] == '1' || game->vp_map[y][x] == 'V' \
-	|| game->vp_map[y][x] == 'E')
+	if (game->vp_map[y][x] == 'V' || game->vp_map[y][x] == 'E' \
+		|| game->vp_map[y][x] == '1')
 		return ;
 	if (game->vp_map[y][x] == 'C')
 		game->valid_collect++;

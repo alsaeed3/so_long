@@ -6,7 +6,7 @@
 /*   By: alsaeed <alsaeed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 14:09:01 by alsaeed           #+#    #+#             */
-/*   Updated: 2023/08/15 12:33:31 by alsaeed          ###   ########.fr       */
+/*   Updated: 2023/09/01 17:12:32 by alsaeed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	*ret_line(char *stash)
 	if (!stash || !stash[i])
 		return (NULL);
 	i = ft_strlen_nl(stash) + 2;
-	ret = malloc(sizeof(char) * i);
+	ret = (char *)malloc(sizeof(char) * i);
 	if (!ret)
 		return (NULL);
 	i = 0;

@@ -6,22 +6,21 @@
 /*   By: alsaeed <alsaeed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 21:23:16 by alsaeed           #+#    #+#             */
-/*   Updated: 2023/08/15 09:26:49 by alsaeed          ###   ########.fr       */
+/*   Updated: 2023/09/01 14:44:13 by alsaeed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/libft.h"
-#include <stdio.h>
 
-size_t	ft_strlen(char *buf)
+size_t	ft_strlen(char *str)
 {
 	size_t	count;
 
 	count = 0;
-	if (!buf)
+	if (!str)
 		return (0);
-	while (*buf++)
+	while (str[count])
 		count++;
-	buf = buf - count;
+	str = str - count;
 	return (count);
 }

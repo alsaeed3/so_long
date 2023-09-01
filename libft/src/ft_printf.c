@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alsaeed <alsaeed@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: alsaeed <alsaeed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:11:31 by alsaeed           #+#    #+#             */
-/*   Updated: 2023/07/24 15:50:22 by alsaeed          ###   ########.fr       */
+/*   Updated: 2023/09/01 16:48:27 by alsaeed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,11 @@ int	ft_printf(char *str, ...)
 
 	i = 0;
 	len = 0;
+	if (!str)
+	{
+		write(1, "(null)\n", 8);
+		return (0);
+	}
 	va_start(lst, str);
 	while (str[i])
 	{

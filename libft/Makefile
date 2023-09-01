@@ -6,7 +6,7 @@
 #    By: alsaeed <alsaeed@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 14:48:47 by alsaeed           #+#    #+#              #
-#    Updated: 2023/08/15 10:40:22 by alsaeed          ###   ########.fr        #
+#    Updated: 2023/09/01 11:18:25 by alsaeed          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ SRC_GNL =		src/get_next_line.c src/get_next_line_utils.c
 OBJ_GNL =		$(SRC_GNL:.c=.o)
 
 CC = 			cc
-CFLAGS =		-Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS =		-Wall -Wextra -Werror
 RM = 			rm -f
 ARFLAGS = 		ar -rcs
 
