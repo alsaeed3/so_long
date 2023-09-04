@@ -6,7 +6,7 @@
 /*   By: alsaeed <alsaeed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 17:13:43 by alsaeed           #+#    #+#             */
-/*   Updated: 2023/09/01 15:58:17 by alsaeed          ###   ########.fr       */
+/*   Updated: 2023/09/04 14:14:18 by alsaeed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int		check_map_characters(t_game *game, int y, int x)
 {
+	ft_printf("***check_map_characters***\n");
 	x = 0;
 	while (game->map_2d[y][x])
 	{
@@ -32,6 +33,7 @@ int		check_map_characters(t_game *game, int y, int x)
 
 void	locate_p_e(t_game *game, int y, int x, char p_e)
 {
+	ft_printf("***locate_p_e***\n");
 	y = 0;
 	while (game->map_2d[y])
 	{
@@ -59,22 +61,22 @@ void	locate_p_e(t_game *game, int y, int x, char p_e)
 
 int		move_player(t_game *game, int x, int y)
 {
-	if (game->map_2d[game->p_locy + y][game->p_locy + x] == '1')
+	ft_printf("***move_player***\n");
+	if (game->map_2d[game->p_locy + y][game->p_locx + x] == '1')
 		return (0);
 	else if (game->map_2d[game->p_locy + y][game->p_locx + x] == 'E' \
 	&& game->map_collect > 0)
 	{
 		draw_img(game, FLOOR, game->p_locx, game->p_locy);
 		draw_img(game, PLAYER, game->p_locx + x, game->p_locy + y);
-		moves_counter(game, game->p_locy, game->p_locx);
+		moves_counter(game, game->p_locy + y, game->p_locx + x);
 		game->exit_mark = 1;
 	}
-	else if (game->map_2d[game->p_locy + y][game->p_locx + x] == 'E' \
-	&& game->map_collect <= 0)
+	else
 	{
 		draw_img(game, FLOOR, game->p_locx, game->p_locy);
 		draw_img(game, PLAYER, game->p_locx + x, game->p_locy + y);
-		moves_counter(game, game->p_locy, game->p_locx);
+		moves_counter(game, game->p_locy + y, game->p_locx + x);
 		exit_mark(game, game->p_locx + x, game->p_locy + y);
 		victory(game);
 	}
@@ -83,27 +85,29 @@ int		move_player(t_game *game, int x, int y)
 
 int		keyboard_hook(int key_num, t_game *game)
 {
-	if (key_num == 13)
+	ft_printf("***keyboard_hook***\n");
+	if (key_num == 119)
 		move_player(game, 0, -1);
-	else if (key_num == 1)
+	else if (key_num == 115)
 		move_player(game, 0, 1);
-	else if (key_num == 2)
-		move_player(game, 0, 1);
-	else if (key_num == 0)
-		move_player(game, 0, -1);
-	else if (key_num == 53)
+	else if (key_num == 100)
+		move_player(game, 1, 0);
+	else if (key_num == 97)
+		move_player(game, -1, 0);
+	else if (key_num == 65307)
 		exit_window(game);
 	return (0);
 }
 
 void	moves_counter(t_game *game, int y, int x)
 {
+	ft_printf("***moves_counter***\n");
 	ft_printf("Moves: %d\n", ++game->player_moves);
 	if (game->map_2d[y][x] == 'C')
 	{
 		game->map_2d[y][x] = '0';
 		game->map_collect--;
 	}
-	game->p_locx = x;
 	game->p_locy = y;
+	game->p_locx = x;
 }

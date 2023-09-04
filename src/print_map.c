@@ -6,7 +6,7 @@
 /*   By: alsaeed <alsaeed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:05:20 by alsaeed           #+#    #+#             */
-/*   Updated: 2023/09/01 19:21:58 by alsaeed          ###   ########.fr       */
+/*   Updated: 2023/09/04 13:58:41 by alsaeed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 
 void	print_2d_map(t_game *game, char *map_file)
 {
-	ft_printf("print_2d_map\n");
+	ft_printf("***print_2d_map***\n");
 	game->fd = open(map_file, O_RDONLY);
 	malloc_map_2d(game);
 	game->y = 0;
 	while (1)
 	{
-		game->map_read = get_next_line(game->fd);		
+		game->map_read = get_next_line(game->fd);
 		if (!game->map_read)
 			break;
 		game->map_2d[game->y] = ft_strdup_nonl(game->map_read);
@@ -41,7 +41,7 @@ void	print_2d_map(t_game *game, char *map_file)
 
 int		check_walls(t_game *game, size_t y, size_t x)
 {
-	ft_printf("check_walls\n");
+	ft_printf("***check_walls***\n");
     if (y == 0 || y == game->map_height - 1)
     {
         x = 0;
@@ -59,7 +59,7 @@ int		check_walls(t_game *game, size_t y, size_t x)
 
 void	check_pec_count(t_game *game)
 {
-	ft_printf("check_pec_count\n");
+	ft_printf("***check_pec_count***\n");
 	if (game->map_player == 0)
 	{
 		write(2, "\n\nNo player in the map\n\n", 25);
@@ -82,14 +82,14 @@ void	check_pec_count(t_game *game)
 	}
 	else if (game->map_collect == 0)
 	{
-		write(2, "\n\nNo collectible in the map\n\n", 31);
+		write(2, "\n\nNo collectible in the map\n\n", 30);
 		free_and_exit(game);
 	}
 }
 
 void	check_map_errors(t_game *game, int y, int x)
 {
-	
+	ft_printf("***check_map_errors***\n");	
 	if (check_walls(game, y, x) == 1)
 	{
 		write (2, "\n\nInvalid map borders\n\n", 24);

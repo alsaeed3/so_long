@@ -8,11 +8,11 @@
 # include <limits.h>
 # include <fcntl.h>
 
-# define WALL "../textures/wall.xpm"
-# define PLAYER "../textures/player.xpm"
-# define FLOOR "../textures/floor.xpm"
-# define COLLECTABLE "../textures/coin.xpm"
-# define EXIT "../textures/exit.xpm"
+# define WALL "./textures/wall.xpm"
+# define PLAYER "./textures/player.xpm"
+# define FLOOR "./textures/floor.xpm"
+# define COLLECTABLE "./textures/coin.xpm"
+# define EXIT "./textures/exit.xpm"
 
 typedef struct s_game
 {

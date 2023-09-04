@@ -6,7 +6,7 @@
 /*   By: alsaeed <alsaeed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 14:58:24 by alsaeed           #+#    #+#             */
-/*   Updated: 2023/09/01 18:15:01 by alsaeed          ###   ########.fr       */
+/*   Updated: 2023/09/04 14:08:52 by alsaeed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	check_argc_and_ber(int argc, char *argv)
 {
+	ft_printf("***check_argc_and_ber***\n");
 	int len;
 
 	len = 0;
@@ -32,12 +33,16 @@ void	check_argc_and_ber(int argc, char *argv)
 
 void	parse_fd(int fd)
 {
+	char *buf;
+
+	buf = NULL;
+	ft_printf("***parse_fd***\n");
 	if (fd == -1)
 	{
 		write(2, "The given map file is inaccessible\n", 36);
 		exit (1);
 	}
-	if (!(read(fd, NULL, 1)))
+	if (!(read(fd, buf, 1)))
 	{
 		write(2, "The given map file is empty\n", 29);
 		exit (1);
@@ -51,6 +56,7 @@ void	parse_fd(int fd)
 
 void	init_game(t_game *game)
 {
+	ft_printf("***init game***\n");
 	game->x = 0;
 	game->y = 0;
 	game->fd = 0;
@@ -72,10 +78,13 @@ void	init_game(t_game *game)
 	game->valid_collect = 0;
 	game->valid_exit = 0;
 	game->map_read = NULL;
+	game->map_2d = NULL;
+	game->vp_map = NULL;
 }
 
 void	malloc_map_2d(t_game *game)
 {
+	ft_printf("***malloc_map_2d***\n");
 	size_t	i;
 	size_t j;
 

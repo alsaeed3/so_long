@@ -6,7 +6,7 @@
 /*   By: alsaeed <alsaeed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:03:04 by alsaeed           #+#    #+#             */
-/*   Updated: 2023/08/31 16:51:42 by alsaeed          ###   ########.fr       */
+/*   Updated: 2023/09/04 14:10:37 by alsaeed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	victory(t_game *game)
 {
+	ft_printf("***victory***\n");
 	if (game->player_coins <= 0 \
 		&& game->map_2d[game->p_locy][game->p_locx] == 'E')
 	{
@@ -24,6 +25,7 @@ void	victory(t_game *game)
 
 void	exit_mark(t_game *game, int x, int y)
 {
+	ft_printf("***exit_mark***\n");
 	if (game->exit_mark == 1 && game->map_2d[y][x] != 'E')
 	{
 		draw_img(game, EXIT, game->e_locx, game->e_locy);
@@ -33,6 +35,7 @@ void	exit_mark(t_game *game, int x, int y)
 
 void	exit_window(t_game *game)
 {
+	ft_printf("***exit_window***\n");
 	mlx_clear_window(game->mlx_ptr, game->mlx_win);
 	mlx_destroy_window(game->mlx_ptr, game->mlx_win);
 	free_and_exit(game);
@@ -40,20 +43,22 @@ void	exit_window(t_game *game)
 
 void	draw_img(t_game *game, char *path, int x, int y)
 {
+	ft_printf("***draw_img***\n");
 	int	size;
 
-	size = 48;
+	size = 64;
 	x = x * size;
 	y = y * size;
 	game->mlx_img = mlx_xpm_file_to_image(game->mlx_ptr, path, &size, &size);
 	if (!game->mlx_img)
-		exit(1);
+		free_and_exit(game);
 	mlx_put_image_to_window(game->mlx_ptr, game->mlx_win, game->mlx_img, x, y);
 	mlx_destroy_image(game->mlx_ptr, game->mlx_img);
 }
 
 void	init_mlx(t_game *game)
 {
+	ft_printf("***init_mlx***\n");
 	game->mlx_ptr = NULL;
 	game->mlx_img = NULL;
 	game->mlx_win = NULL;
@@ -61,6 +66,7 @@ void	init_mlx(t_game *game)
 
 void draw_map(t_game *game)
 {
+	ft_printf("***draw_map***\n");
 	int	x;
 	int	y;
 
@@ -71,6 +77,7 @@ void draw_map(t_game *game)
 		x = 0;
 		while(game->map_2d[y][x])
 		{
+			ft_printf("%c", game->map_2d[y][x]);
 			pick_img(game, game->map_2d[y][x], x, y);
 			x++;
 		}
@@ -80,6 +87,7 @@ void draw_map(t_game *game)
 
 void	pick_img(t_game *game, char c, int x, int y)
 {
+	ft_printf("***pick_img***\n");
 	if (c == '1')
 		draw_img(game, WALL, x, y);
 	else if (c == '0')
