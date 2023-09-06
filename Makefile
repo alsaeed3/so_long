@@ -6,33 +6,42 @@
 #    By: alsaeed <alsaeed@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/10 09:55:28 by alsaeed           #+#    #+#              #
-#    Updated: 2023/09/01 11:20:55 by alsaeed          ###   ########.fr        #
+#    Updated: 2023/09/06 10:53:53 by alsaeed          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 
-SRCS =	src/free_exit_utils.c src/keyboard_hooks.c src/print_map.c src/utils.c \
-		src/utils2.c src/valid_path.c src/main.c
+SRCS =	src/free_exit_utils.c src/move_utils.c src/print_map.c src/map_utils.c \
+		src/img_utils.c src/find_valid_path.c src/main.c
 OBJS = $(SRCS:.c=.o)
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 INC = -Imlx
+MLX_FLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
 
-$(NAME): libft/libft.a ${OBJS}
+MLX_DIR = ./mlx
+MLX_LIB = $(MLX_DIR)/libmlx.a
+LIBFT_DIR = ./libft
+LIBFT_LIB = $(LIBFT_DIR)/libft.a
+
+all: $(MLX_LIB) $(LIBFT_LIB) $(NAME)
+
+.c.o:
+	${CC} ${CFLAGS} -c $< -o $@ ${INC}
+
+
+$(NAME): ${OBJS}
 		@make -C MLX
 		@cp ./mlx/libmlx.a .
-		$(CC) $(CFLAGS) $(OBJS) -Lmlx -lmlx -framework OpenGL -framework AppKit libft/libft.a -o $(NAME)
-
-%.o: %.c
-	${CC} ${CFLAGS} ${INC} -c $< -o $@
-
-all: libft $(NAME)
-
-
-libft:
-		@make -C libft
+		$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(MLX_FLAGS) $(LIBFT_LIB)
+		
+$(MLX_LIB):
+	@make -C $(MLX_DIR)
+	
+$(LIBFT_LIB):
+	@make -C $(LIBFT_DIR)
 
 clean: 
 		@rm -f $(OBJS)
@@ -47,4 +56,4 @@ fclean: clean
 
 re: fclean all 
 
-.PHONY: all libft clean fclean re
+.PHONY: all clean fclean re

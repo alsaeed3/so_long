@@ -6,7 +6,7 @@
 #    By: alsaeed <alsaeed@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 14:48:47 by alsaeed           #+#    #+#              #
-#    Updated: 2023/09/01 11:18:25 by alsaeed          ###   ########.fr        #
+#    Updated: 2023/09/06 10:58:07 by alsaeed          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRCS =			src/ft_isalpha.c src/ft_isdigit.c src/ft_isalnum.c src/ft_isascii.c src
 OBJS = 			$(SRCS:.c=.o)
 
 SRCT =			src/ft_bzero.c src/ft_strchr.c src/ft_strdup.c src/ft_strtrim.c src/ft_memcpy.c \
-				src/ft_memset.c src/ft_substr.c src/ft_calloc.c src/ft_strlcpy.c
+				src/ft_memset.c src/ft_substr.c src/ft_calloc.c src/ft_strlcpy.c src/ft_strdup_nonl.c
 OBJT =			$(SRCT:.c=.o)
 
 SRC_LIST =  	src/ft_lstnew.c src/ft_lstadd_front.c src/ft_lstsize.c src/ft_lstlast.c \

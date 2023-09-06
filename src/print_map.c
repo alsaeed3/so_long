@@ -6,24 +6,22 @@
 /*   By: alsaeed <alsaeed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:05:20 by alsaeed           #+#    #+#             */
-/*   Updated: 2023/09/01 19:21:58 by alsaeed          ###   ########.fr       */
+/*   Updated: 2023/09/06 10:52:16 by alsaeed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
-#include <stdio.h>
 
 void	print_2d_map(t_game *game, char *map_file)
 {
-	ft_printf("print_2d_map\n");
 	game->fd = open(map_file, O_RDONLY);
 	malloc_map_2d(game);
 	game->y = 0;
 	while (1)
 	{
-		game->map_read = get_next_line(game->fd);		
+		game->map_read = get_next_line(game->fd);
 		if (!game->map_read)
-			break;
+			break ;
 		game->map_2d[game->y] = ft_strdup_nonl(game->map_read);
 		free(game->map_read);
 		game->y++;
@@ -37,62 +35,63 @@ void	print_2d_map(t_game *game, char *map_file)
 		game->y++;
 	}
 	check_pec_count(game);
+	backup_map(game);
+	check_ec_path(game, game->p_locy, game->p_locx);
+	check_valid(game);
 }
 
-int		check_walls(t_game *game, size_t y, size_t x)
+int	check_walls(t_game *game, size_t y, size_t x)
 {
-	ft_printf("check_walls\n");
-    if (y == 0 || y == game->map_height - 1)
-    {
-        x = 0;
-        while (x < (game->map_width - 1))
-        {
-            if (game->map_2d[y][x] != '1')
-                return(1);
-            x++;
-        }
-    }
-    if (game->map_2d[y][0] != '1' || game->map_2d[y][game->map_width - 1] != '1')
-    	return(1);
-    return (0);
+	if (y == 0 || y == game->map_height - 1)
+	{
+		x = 0;
+		while (x < (game->map_width - 1))
+		{
+			if (game->map_2d[y][x] != '1')
+				return (1);
+			x++;
+		}
+	}
+	if (game->map_2d[y][0] != '1' \
+		|| game->map_2d[y][game->map_width - 1] != '1')
+		return (1);
+	return (0);
 }
 
 void	check_pec_count(t_game *game)
 {
-	ft_printf("check_pec_count\n");
 	if (game->map_player == 0)
 	{
-		write(2, "\n\nNo player in the map\n\n", 25);
+		write(2, "Map Error: No player in the map\n", 33);
 		free_and_exit(game);
 	}
 	else if (game->map_player > 1)
 	{
-		write(2, "\n\nMore than one player in the map\n\n", 36);
+		write(2, "Map Error: More than one player in the map\n", 44);
 		free_and_exit(game);
 	}
 	else if (game->map_exit == 0)
 	{
-		write(2, "\n\nNo exit in the map\n\n", 23);
+		write(2, "Map Error: No exit in the map\n", 31);
 		free_and_exit(game);
 	}
 	else if (game->map_exit > 1)
 	{
-		write(2, "\n\nMore than one exit in the map\n\n", 34);
+		write(2, "Map Error: More than one exit in the map\n", 42);
 		free_and_exit(game);
 	}
 	else if (game->map_collect == 0)
 	{
-		write(2, "\n\nNo collectible in the map\n\n", 31);
+		write(2, "Map Error: No collectible in the map\n", 38);
 		free_and_exit(game);
 	}
 }
 
 void	check_map_errors(t_game *game, int y, int x)
 {
-	
 	if (check_walls(game, y, x) == 1)
 	{
-		write (2, "\n\nInvalid map borders\n\n", 24);
+		write (2, "Invalid map borders or it has empty lines\n", 43);
 		free_and_exit(game);
 	}
 	if (check_map_characters(game, y, x) == 1)

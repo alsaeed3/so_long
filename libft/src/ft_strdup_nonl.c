@@ -1,42 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_exit_utils.c                                  :+:      :+:    :+:   */
+/*   ft_strdup_nonl.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alsaeed <alsaeed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/22 16:53:12 by alsaeed           #+#    #+#             */
-/*   Updated: 2023/09/06 10:45:04 by alsaeed          ###   ########.fr       */
+/*   Created: 2023/09/06 10:55:54 by alsaeed           #+#    #+#             */
+/*   Updated: 2023/09/06 10:56:22 by alsaeed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/so_long.h"
+#include "../inc/libft.h"
 
-void	free_map(t_game *game, char **array)
+char	*ft_strdup_nonl(char *s1)
 {
-	size_t	i;
+	char	*dup;
+	int		count;
 
-	i = 0;
-	if (!array)
-		return ;
-	while (i < (game->map_height))
+	count = 0;
+	dup = (char *)malloc(sizeof(char) * (ft_strlen(s1) + 1));
+	if (!dup)
+		return (NULL);
+	while (*s1 && *s1 != '\n')
 	{
-		if (!array[i])
-			return ;
-		free (array[i]);
-		array[i] = NULL;
-		i++;
+		*dup++ = *s1++;
+		count++;
 	}
-	if (array)
-	{
-		free (array);
-		array = NULL;
-	}
-}
-
-void	free_and_exit(t_game *game)
-{
-	if (game->map_2d)
-		free_map(game, game->map_2d);
-	exit (1);
+	*dup = '\0';
+	dup = dup - count;
+	s1 = s1 - count;
+	return (dup);
 }
