@@ -6,7 +6,7 @@
 /*   By: alsaeed <alsaeed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 17:13:43 by alsaeed           #+#    #+#             */
-/*   Updated: 2023/09/06 11:07:35 by alsaeed          ###   ########.fr       */
+/*   Updated: 2023/09/06 13:10:42 by alsaeed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ void	set_block_image(t_game *game, char *path, int x, int y)
 	int	length;
 
 	length = 64;
-	game->mlx_img = mlx_xpm_file_to_image(game->mlx_ptr, path, &length, &length);
+	game->mlx_img = mlx_xpm_file_to_image(game->mlx_ptr, path, \
+		&length, &length);
 	if (!game->mlx_img)
 	{
 		write(2, "Error: Invalid image path, or image file is empty!!\n", 53);

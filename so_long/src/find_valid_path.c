@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   valid_path.c                                       :+:      :+:    :+:   */
+/*   find_valid_path.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alsaeed <alsaeed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 15:30:47 by alsaeed           #+#    #+#             */
-/*   Updated: 2023/09/06 10:52:31 by alsaeed          ###   ########.fr       */
+/*   Updated: 2023/09/06 13:10:09 by alsaeed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	backup_map(t_game *game)
 	if (!game->vp_map)
 		return ;
 	game->y = 0;
-	while(game->map_2d[game->y])
+	while (game->map_2d[game->y])
 	{
 		game->vp_map[game->y] = ft_strdup(game->map_2d[game->y]);
 		game->y++;

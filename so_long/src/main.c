@@ -6,7 +6,7 @@
 /*   By: alsaeed <alsaeed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 13:39:44 by alsaeed           #+#    #+#             */
-/*   Updated: 2023/09/06 10:24:06 by alsaeed          ###   ########.fr       */
+/*   Updated: 2023/09/06 12:56:19 by alsaeed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	read_map(t_game *game)
 			}
 			free (game->map_read);
 			close (game->fd);
-			write(2, "Error: The map is not rectangular \
-				or has empty lines\n", 54);
+			write(2, "Error: The map is not rectangular or has empty lines\n" \
+				, 54);
 			exit (1);
 		}
 		free(game->map_read);
